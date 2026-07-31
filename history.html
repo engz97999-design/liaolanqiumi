@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>球队历史 - 辽宁飞豹</title>
+<style>
+:root{--red:#cc0000;--red-dark:#990000;--gold:#b8860b;--gold-light:#ffd700;--dark:#1a1a2e;--shadow:0 2px 12px rgba(0,0,0,0.1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(--dark);background:#f8f8fc;line-height:1.7;overflow-x:hidden}
+.container{max-width:900px;margin:0 auto;padding:0 20px}
+.hero{position:relative;background:linear-gradient(135deg,#1a1a2e 0%,#2d1f3d 45%,#4a1a1a 100%);color:#fff;padding:80px 20px 64px;text-align:center;overflow:hidden}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:900;letter-spacing:2px;position:relative;z-index:2}
+.hero .sub{color:rgba(255,255,255,0.7);margin-top:10px;font-size:1rem;letter-spacing:3px;position:relative;z-index:2}
+.hero .sub2{color:rgba(255,255,255,0.45);margin-top:6px;font-size:0.85rem;position:relative;z-index:2}
+.back-link{display:inline-block;margin-top:22px;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,0.4);padding:8px 22px;border-radius:50px;font-size:0.85rem;transition:.3s;position:relative;z-index:2}
+.back-link:hover{background:rgba(255,255,255,0.15)}
+.stats{display:flex;justify-content:center;gap:36px;padding:36px 20px;flex-wrap:wrap;background:#fff;border-bottom:1px solid #eee}
+.stat-item{text-align:center}
+.stat-num{font-size:2.4rem;font-weight:900;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.stat-label{font-size:0.85rem;color:#888;margin-top:4px}
+.timeline{position:relative;padding:64px 20px 80px}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--red),var(--gold),var(--red));transform:translateX(-50%);border-radius:2px}
+.tl-item{position:relative;width:50%;padding:0 40px 44px}
+.tl-item:nth-child(odd){left:0;text-align:right}
+.tl-item:nth-child(even){left:50%}
+.tl-item::before{content:'';position:absolute;top:6px;width:16px;height:16px;background:var(--red);border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 3px var(--red)}
+.tl-item:nth-child(odd)::before{right:-8px}
+.tl-item:nth-child(even)::before{left:-8px}
+.tl-year{display:inline-block;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;padding:3px 14px;border-radius:20px;font-size:0.85rem;font-weight:700;margin-bottom:8px}
+.tl-card{background:#fff;border-radius:12px;padding:20px 24px;box-shadow:var(--shadow);border:1px solid #eee;text-align:left}
+.tl-card h3{font-size:1.1rem;margin-bottom:6px;color:var(--dark)}
+.tl-card p{color:#666;font-size:0.9rem}
+.tl-card .tag{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;padding:1px 10px;border-radius:10px;font-size:0.72rem;font-weight:600;margin-bottom:8px}
+.footer{background:var(--dark);color:rgba(255,255,255,0.6);text-align:center;padding:28px 20px;font-size:0.85rem}
+@media(max-width:768px){
+  .timeline::before{left:16px}
+  .tl-item{width:100%;left:0!important;text-align:left;padding:0 0 40px 48px}
+  .tl-item::before{left:8px!important;right:auto!important}
+  .tl-item:nth-child(odd)::before{left:8px;right:auto}
+  .stats{gap:24px}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>辽宁男篮 · 建队史</h1>
+  <p class="sub">从1953年建队到CBA四冠王朝</p>
+  <p class="sub2">辽宁沈阳三生飞豹篮球俱乐部 · 七十余载风雨征程</p>
+  <a class="back-link" href="index.html">← 返回首页</a>
+</div>
+
+<div class="stats">
+  <div class="stat-item"><span class="stat-num">1953</span><span class="stat-label">建队年份</span></div>
+  <div class="stat-item"><span class="stat-num">1995</span><span class="stat-label">CBA创始队</span></div>
+  <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">CBA总冠军</span></div>
+  <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">全运会金牌</span></div>
+  <div class="stat-item"><span class="stat-num">11</span><span class="stat-label">总决赛征程</span></div>
+</div>
+
+<div class="timeline">
+  <div class="tl-item"><div class="tl-year">1953年</div><div class="tl-card"><h3>辽宁篮球队正式组建</h3><p>辽宁省男子篮球队成立，成为新中国最早的专业篮球队伍之一，奠定了辽宁篮球的人才基础。</p></div></div>
+  <div class="tl-item"><div class="tl-year">1980年代</div><div class="tl-card"><h3>全国赛场屡创佳绩</h3><p>辽宁男篮在全国联赛中多次进入前列，培养出吴庆龙、李晓勇等一代名将，被称为"人才摇篮"。</p></div></div>
+  <div class="tl-item"><div class="tl-year">1995年</div><div class="tl-card"><h3>CBA联赛创始球队</h3><p>中国男子篮球职业联赛创立，辽宁队以"辽宁猎人"之名成为八支创始球队之一，正式开启职业化征程。</p></div></div>
+  <div class="tl-item"><div class="tl-year">1997-2000年</div><div class="tl-card"><h3>三进总决赛 连负八一</h3><p>1997-98、1998-99、1999-2000三个赛季，辽宁队三次闯入CBA总决赛，均负于八一王朝，收获三连亚，但也让"辽宁篮球"名震全国。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2007-08赛季</div><div class="tl-card"><h3>重返总决赛 憾负广东</h3><p>以常规赛冠军之姿时隔多年重返总决赛，最终1-4不敌广东，遗憾错失队史首冠。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2014-2016年</div><div class="tl-card"><h3>连续总决赛 冲击未果</h3><p>2014-15、2015-16赛季连续两年闯入总决赛，均负于北京首钢；2016-17赛季再次打进总决赛，负于新疆。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2017年</div><div class="tl-card"><h3>全运会首夺金牌</h3><p>郭士强执教下，辽宁男篮在天津全运会决赛78-61击败新疆，夺得队史首个全运会男篮冠军。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2018年</div><div class="tl-card"><span class="tag">队史首冠</span><h3>CBA总冠军 圆梦22年</h3><p>郭士强率队在总决赛4-0横扫浙江广厦，终结长达22年的冠军等待。哈德森荣膺总决赛MVP，郭艾伦、韩德君、赵继伟等本土球星圆梦。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2021年</div><div class="tl-card"><h3>全运会卫冕成功</h3><p>杨鸣执教的辽宁队在全运会决赛击败广东，成功卫冕全运会男篮金牌。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2022年</div><div class="tl-card"><h3>第二冠 杨鸣时代开启</h3><p>杨鸣以主帅身份率队4-0横扫浙江广厦，夺得队史第二座CBA总冠军，赵继伟荣膺总决赛MVP，开启新一代王朝。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2023年</div><div class="tl-card"><h3>卫冕成功 三冠在手</h3><p>总决赛4-0完胜浙江稠州，实现卫冕，队史第三次捧起CBA总冠军奖杯，福格荣膺总决赛MVP。</p></div></div>
+  <div class="tl-item"><div class="tl-year">2024年</div><div class="tl-card"><span class="tag">三连冠王朝</span><h3>四冠达成 铸就王朝</h3><p>总决赛4-0横扫新疆，辽宁队完成三连冠，以4座总冠军成为CBA历史上真正的豪门。赵继伟再获总决赛MVP，弗格续写传奇。</p></div></div>
+  <div class="tl-item"><div class="tl-year">如今</div><div class="tl-card"><h3>薪火相传 继续前行</h3><p>从老一辈的吴庆龙、李晓勇，到郭艾伦、韩德君、赵继伟、张镇麟，辽宁篮球始终以坚韧著称，朝着更高的目标继续前行。</p></div></div>
+</div>
+
+<div class="footer">辽宁飞豹 · 球迷之家 | 本网站为非官方球迷社区网站</div>
+</body>
+</html>
