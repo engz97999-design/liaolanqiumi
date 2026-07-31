@@ -19,7 +19,15 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(204,0,0,0.4)}
 .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,0.6)}
 .btn-outline:hover{background:rgba(255,255,255,0.12);border-color:#fff}
-
+ .merch-footer{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+ .merch-footer .left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+ .btn-buy{display:inline-block;padding:6px 16px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-weight:600;font-size:0.82rem;cursor:pointer;transition:.3s;white-space:nowrap;line-height:1.4}
+ .btn-buy:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(204,0,0,0.3)}
+   .merch-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .btn-buy{width:100%;text-align:center;margin-top:4px}
+  .merch-footer{flex-direction:column;align-items:stretch}
+  .merch-footer .left{justify-content:space-between;width:100%}
+  
 /* 导航 */
 .header{position:fixed;top:0;left:0;right:0;height:65px;background:rgba(26,26,46,0.95);backdrop-filter:blur(12px);z-index:1000;border-bottom:1px solid rgba(255,255,255,0.06)}
 .header-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:100%;display:flex;align-items:center;justify-content:space-between}
@@ -101,10 +109,6 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .merch-desc{font-size:0.85rem;color:#888;margin-bottom:12px}
 .merch-footer{display:flex;align-items:center;justify-content:space-between}
 .merch-price{font-size:1.15rem;font-weight:700;color:var(--red)}
-.merch-footer{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.merch-footer .left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.btn-buy{display:inline-block;padding:6px 16px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-weight:600;font-size:0.82rem;cursor:pointer;transition:.3s;white-space:nowrap;line-height:1.4}
-.btn-buy:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(204,0,0,0.3)}
 .buy-modal{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s}
 .buy-modal-bg{position:absolute;inset:0;background:rgba(0,0,0,0.5)}
 .buy-modal.show{opacity:1;pointer-events:auto}
@@ -129,6 +133,27 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .order-success .check{width:56px;height:56px;border-radius:50%;background:#28a745;color:#fff;font-size:1.8rem;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
 .order-success h3{font-size:1.15rem;margin-bottom:6px}
 .order-success p{color:#888;font-size:0.88rem}
+/* 球员详情弹窗 */
+.player-modal{position:fixed;inset:0;z-index:9997;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s}
+.player-modal-bg{position:absolute;inset:0;background:rgba(0,0,0,0.55)}
+.player-modal.show{opacity:1;pointer-events:auto}
+.player-modal-content{position:relative;background:#fff;border-radius:16px;width:520px;max-width:92vw;max-height:88vh;overflow-y:auto;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+.player-modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;color:#999;cursor:pointer;line-height:1;z-index:10}
+.player-modal-close:hover{color:#333}
+.pm-header{display:flex;gap:18px;align-items:center;margin-bottom:18px}
+.pm-avatar{width:88px;height:88px;border-radius:14px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2.6rem;background:#1a1a2e}
+.pm-avatar img{width:100%;height:100%;object-fit:contain;padding:4px}
+.pm-name{font-size:1.5rem;font-weight:800;margin-bottom:4px}
+.pm-meta{color:#888;font-size:0.9rem}
+.pm-tag{display:inline-block;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;padding:2px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;margin-top:6px}
+.pm-section{margin-bottom:18px}
+.pm-section h3{font-size:1rem;font-weight:700;margin-bottom:10px;padding-left:10px;border-left:3px solid var(--red)}
+.pm-honor{display:flex;gap:8px;align-items:flex-start;padding:8px 12px;background:#fafafa;border-radius:8px;margin-bottom:6px;font-size:0.88rem}
+.pm-honor::before{content:"🏆";flex-shrink:0}
+.pm-highlight{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#fff5f5;border-radius:8px;margin-bottom:6px;font-size:0.88rem}
+.pm-highlight .pm-game{font-weight:600}
+.pm-highlight .pm-score{color:var(--red);font-weight:800;white-space:nowrap}
+.pm-empty{color:#999;font-size:0.85rem;padding:10px 0;text-align:center}
 .pay-methods{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .pay-methods label{flex:1;min-width:100px;display:flex;align-items:center;gap:6px;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;cursor:pointer;transition:.2s;font-size:0.9rem;font-weight:600;margin:0}
 .pay-methods label:has(input:checked){border-color:var(--red);background:#fff5f5}
@@ -137,7 +162,6 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .pay-info{display:none;background:#f8f8fc;border-radius:10px;padding:16px;margin-bottom:16px;text-align:center}
 .pay-info.show{display:block}
 .pay-info .pay-qr{width:160px;height:160px;background:#fff;border:2px solid #eee;border-radius:10px;margin:10px auto;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#999}
-.pay-info .pay-qr img{max-width:100%;max-height:100%}
 .pay-info .pay-account{font-weight:700;color:var(--red);font-size:1rem;margin:6px 0}
 .pay-info .pay-tip{color:#888;font-size:0.82rem}
 
@@ -206,10 +230,13 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
   .timeline-item{padding-left:20px}
   .timeline-item::before{left:-22px}
   .players-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}
-  .merch-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
   .message-form{padding:20px}
   .messages-section{padding:20px}
-}
+
+  .merch-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .btn-buy{width:100%;text-align:center;margin-top:4px}
+  .merch-footer{flex-direction:column;align-items:stretch}
+  .merch-footer .left{justify-content:space-between;width:100%}}
 </style>
 </head>
 <body>
@@ -223,7 +250,7 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 <a class="nav-link" data-section="honors">荣誉殿堂</a>
 <a class="nav-link" data-section="players">历年球员</a>
 <a class="nav-link" data-section="merch">球迷周边</a>
-<a class="nav-link" data-section="guestbook">留言区</a>
+<a class="nav-link" href="history.html" style="color:rgba(255,255,255,0.7);padding:7px 16px;border-radius:8px;font-weight:500;font-size:0.9rem;transition:.3s;cursor:pointer;text-decoration:none;display:inline-block">球队历史</a><a class="nav-link" data-section="guestbook">留言区</a>
 <a class="nav-link" data-section="highlights">精彩集锦</a>
 </nav>
 <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
@@ -421,6 +448,29 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 
 
 
+<!-- 球员详情弹窗 -->
+<div class="player-modal" id="playerModal">
+  <div class="player-modal-bg" onclick="closePlayer()"></div>
+  <div class="player-modal-content">
+    <button class="player-modal-close" onclick="closePlayer()">&#10005;</button>
+    <div class="pm-header">
+      <div class="pm-avatar" id="pmAvatar">🏀</div>
+      <div>
+        <div class="pm-name" id="pmName">球员</div>
+        <div class="pm-meta" id="pmMeta"></div>
+        <span class="pm-tag" id="pmTag">现役</span>
+      </div>
+    </div>
+    <div class="pm-section">
+      <h3>生涯荣誉</h3>
+      <div id="pmHonors"></div>
+    </div>
+    <div class="pm-section">
+      <h3>高光比赛</h3>
+      <div id="pmHighlights"></div>
+    </div>
+  </div>
+</div>
 <!-- 购买弹窗 -->
 <div class="buy-modal" id="buyModal">
   <div class="buy-modal-bg" onclick="closeBuy()"></div>
@@ -466,7 +516,7 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 
 <script>
 // 球员数据
-const players=[{name:'赵继伟',en:'Zhao Jiwei',num:'3',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#0066cc,#003d99)',emoji:'🎯'},{name:'付豪',en:'Fu Hao',num:'36',pos:'大前锋',tag:'current',bg:'linear-gradient(135deg,#660066,#440044)',emoji:'🔥'},{name:'王嶐钦',en:'Wang Lanqin',num:'1',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#004466,#002233)',emoji:'🎯'},{name:'李虎翼',en:'Li Huyi',num:'5',pos:'得分后卫',tag:'current',bg:'linear-gradient(135deg,#664400,#332200)',emoji:'💥'},{name:'张峻豪',en:'Zhang Junhao',num:'11',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#446644,#223322)',emoji:'⭐'},{name:'张陈志峰',en:'Zhang Chenzhifeng',num:'15',pos:'中锋',tag:'current',bg:'linear-gradient(135deg,#2d5a5a,#1a3a3a)',emoji:'📈'},{name:'赵森',en:'Zhao Sen',num:'24',pos:'大前锋',tag:'current',bg:'linear-gradient(135deg,#5a2d5a,#3a1a3a)',emoji:'💪'},{name:'俞泽辰',en:'Yu Zechen',num:'27',pos:'小前锋',tag:'current',bg:'linear-gradient(135deg,#5a5a2d,#3a3a1a)',emoji:'🌟'},{name:'吴昌泽',en:'Wu Changze',num:'21',pos:'大前锋',tag:'current',bg:'linear-gradient(135deg,#2d4a6a,#1a2a4a)',emoji:'🔥'},{name:'姜宇星',en:'Jiang Yuxing',num:'8',pos:'小前锋',tag:'current',bg:'linear-gradient(135deg,#cc6600,#884400)',emoji:'💥'},{name:'段睿麐',en:'Duan Ruiqi',num:'2',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#336644,#224433)',emoji:'🎯'},{name:'鄘手麐',en:'Yan Shouqi',num:'1',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#5a2d6a,#3a1a4a)',emoji:'💫'},{name:'郭艾伦',en:'Guo Ailun',num:'13',pos:'控球后卫',tag:'former',bg:'linear-gradient(135deg,#cc0000,#8b0000)',emoji:'🏃'},{name:'韩德君',en:'Han Dejun',num:'55',pos:'中锋',tag:'former',bg:'linear-gradient(135deg,#2d2d44,#1a1a2e)',emoji:'🏋️'},{name:'李晓旭',en:'Li Xiaoxu',num:'22',pos:'大前锋',tag:'former',bg:'linear-gradient(135deg,#cc6600,#993300)',emoji:'💪'},{name:'张镇麟',en:'Zhang Zhenlin',num:'7',pos:'小前锋',tag:'former',bg:'linear-gradient(135deg,#006633,#004422)',emoji:'🌟'},{name:'刘雁宇',en:'Liu Yanyu',num:'17',pos:'中锋',tag:'former',bg:'linear-gradient(135deg,#996633,#664422)',emoji:'📈'},{name:'丛明晨',en:'Cong Mingchen',num:'10',pos:'小前锋',tag:'former',bg:'linear-gradient(135deg,#336699,#224466)',emoji:'🏀'},{name:'杨鸣',en:'Yang Ming',num:'12',pos:'得分后卫',tag:'legend',bg:'linear-gradient(135deg,#8b4513,#5c2e0a)',emoji:'👨‍🏫'},{name:'郭士强',en:'Guo Shiqiang',num:'9',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#333366,#222244)',emoji:'🧠'},{name:'吴乃群',en:'Wu Naiqun',num:'35',pos:'大前锋',tag:'legend',bg:'linear-gradient(135deg,#666633,#444422)',emoji:'🏛️'},{name:'李晓勇',en:'Li Xiaoyong',num:'5',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#334455,#223344)',emoji:'⭐'},{name:'吴庆龙',en:'Wu Qinglong',num:'6',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#555577,#333355)',emoji:'🎓'},{name:'贺天举',en:'He Tianju',num:'6',pos:'前锋',tag:'legend',bg:'linear-gradient(135deg,#5a5a7a,#3a3a5a)',emoji:'✨'},{name:'刘志轩',en:'Liu Zhixuan',num:'11',pos:'后卫/前锋',tag:'legend',bg:'linear-gradient(135deg,#4a6a4a,#2a4a2a)',emoji:'🛡️'},{name:'张庆鹏',en:'Zhang Qingpeng',num:'9',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#445566,#334455)',emoji:'🚀'},{name:'哈德森',en:'Lester Hudson',num:'14',pos:'得分后卫',tag:'import',bg:'linear-gradient(135deg,#cc0000,#ff6600)',emoji:'🏆'},{name:'巴斯',en:'Brandon Bass',num:'21',pos:'大前锋',tag:'import',bg:'linear-gradient(135deg,#2d5a27,#1a3a15)',emoji:'💥'},{name:'福格',en:'Kyle Fogg',num:'4',pos:'得分后卫',tag:'import',bg:'linear-gradient(135deg,#1a4a7a,#0d2d4d)',emoji:'🎯'},{name:'莫兰德',en:'Eric Moreland',num:'25',pos:'中锋',tag:'import',bg:'linear-gradient(135deg,#4a3a1a,#2d2010)',emoji:'🔒'},{name:'威尔斯',en:'Dez Wells',num:'0',pos:'得分后卫',tag:'import',bg:'linear-gradient(135deg,#cc3300,#661100)',emoji:'🔥'}];
+const players=[{name:'赵继伟',en:'Zhao Jiwei',num:'3',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#0066cc,#003d99)',emoji:'🎯',photo:'player_zhao_jiwei.jpg'},{name:'付豪',en:'Fu Hao',num:'36',pos:'大前锋',tag:'current',bg:'linear-gradient(135deg,#660066,#440044)',emoji:'🔥',photo:'player_fu_hao.jpg'},{name:'王岚钦',en:'Wang Lanqin',num:'1',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#004466,#002233)',emoji:'🎯',photo:'player_wang_lanqin.jpg'},{name:'李虎翼',en:'Li Huyi',num:'5',pos:'得分后卫',tag:'current',bg:'linear-gradient(135deg,#664400,#332200)',emoji:'💥',photo:'player_li_huyi.jpg'},{name:'张峻豪',en:'Zhang Junhao',num:'11',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#446644,#223322)',emoji:'⭐',photo:'player_zhang_junhao.jpg'},{name:'张陈志峰',en:'Zhang Chenzhifeng',num:'15',pos:'中锋',tag:'current',bg:'linear-gradient(135deg,#2d5a5a,#1a3a3a)',emoji:'📈',photo:'player_zhang_chenzhifeng.jpg'},{name:'赵森',en:'Zhao Sen',num:'24',pos:'大前锋',tag:'current',bg:'linear-gradient(135deg,#5a2d5a,#3a1a3a)',emoji:'💪',photo:'player_zhao_sen.jpg'},{name:'俞泽辰',en:'Yu Zechen',num:'27',pos:'小前锋',tag:'current',bg:'linear-gradient(135deg,#5a5a2d,#3a3a1a)',emoji:'🌟',photo:'player_yu_zechen.jpg'},{name:'吴昌泽',en:'Wu Changze',num:'21',pos:'大前锋',tag:'current',bg:'linear-gradient(135deg,#2d4a6a,#1a2a4a)',emoji:'🔥',photo:'player_wu_changze.jpg'},{name:'姜宇星',en:'Jiang Yuxing',num:'8',pos:'小前锋',tag:'current',bg:'linear-gradient(135deg,#cc6600,#884400)',emoji:'💥',photo:'player_jiang_yuxing.jpg'},{name:'段睿骐',en:'Duan Ruiqi',num:'2',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#336644,#224433)',emoji:'🎯'},{name:'鄢手骐',en:'Yan Shouqi',num:'1',pos:'控球后卫',tag:'current',bg:'linear-gradient(135deg,#5a2d6a,#3a1a4a)',emoji:'💫',photo:'player_yan_shouqi.jpg'},{name:'郭艾伦',en:'Guo Ailun',num:'13',pos:'控球后卫',tag:'former',bg:'linear-gradient(135deg,#cc0000,#8b0000)',emoji:'🏃'},{name:'韩德君',en:'Han Dejun',num:'55',pos:'中锋',tag:'former',bg:'linear-gradient(135deg,#2d2d44,#1a1a2e)',emoji:'🏋️'},{name:'李晓旭',en:'Li Xiaoxu',num:'22',pos:'大前锋',tag:'former',bg:'linear-gradient(135deg,#cc6600,#993300)',emoji:'💪'},{name:'张镇麟',en:'Zhang Zhenlin',num:'7',pos:'小前锋',tag:'former',bg:'linear-gradient(135deg,#006633,#004422)',emoji:'🌟'},{name:'刘雁宇',en:'Liu Yanyu',num:'17',pos:'中锋',tag:'former',bg:'linear-gradient(135deg,#996633,#664422)',emoji:'📈'},{name:'丛明晨',en:'Cong Mingchen',num:'10',pos:'小前锋',tag:'former',bg:'linear-gradient(135deg,#336699,#224466)',emoji:'🏀'},{name:'杨鸣',en:'Yang Ming',num:'12',pos:'得分后卫',tag:'legend',bg:'linear-gradient(135deg,#8b4513,#5c2e0a)',emoji:'👨‍🏫'},{name:'郭士强',en:'Guo Shiqiang',num:'9',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#333366,#222244)',emoji:'🧠'},{name:'吴乃群',en:'Wu Naiqun',num:'35',pos:'大前锋',tag:'legend',bg:'linear-gradient(135deg,#666633,#444422)',emoji:'🏛️'},{name:'李晓勇',en:'Li Xiaoyong',num:'5',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#334455,#223344)',emoji:'⭐'},{name:'吴庆龙',en:'Wu Qinglong',num:'6',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#555577,#333355)',emoji:'🎓'},{name:'贺天举',en:'He Tianju',num:'6',pos:'前锋',tag:'legend',bg:'linear-gradient(135deg,#5a5a7a,#3a3a5a)',emoji:'✨'},{name:'刘志轩',en:'Liu Zhixuan',num:'11',pos:'后卫/前锋',tag:'legend',bg:'linear-gradient(135deg,#4a6a4a,#2a4a2a)',emoji:'🛡️'},{name:'张庆鹏',en:'Zhang Qingpeng',num:'9',pos:'后卫',tag:'legend',bg:'linear-gradient(135deg,#445566,#334455)',emoji:'🚀'},{name:'哈德森',en:'Lester Hudson',num:'14',pos:'得分后卫',tag:'import',bg:'linear-gradient(135deg,#cc0000,#ff6600)',emoji:'🏆'},{name:'巴斯',en:'Brandon Bass',num:'21',pos:'大前锋',tag:'import',bg:'linear-gradient(135deg,#2d5a27,#1a3a15)',emoji:'💥'},{name:'福格',en:'Kyle Fogg',num:'4',pos:'得分后卫',tag:'import',bg:'linear-gradient(135deg,#1a4a7a,#0d2d4d)',emoji:'🎯'},{name:'莫兰德',en:'Eric Moreland',num:'25',pos:'中锋',tag:'import',bg:'linear-gradient(135deg,#4a3a1a,#2d2010)',emoji:'🔒'},{name:'威尔斯',en:'Dez Wells',num:'0',pos:'得分后卫',tag:'import',bg:'linear-gradient(135deg,#cc3300,#661100)',emoji:'🔥'}];
 
 // 导航
 const navLinks=document.querySelectorAll('.nav-link');
@@ -512,7 +562,7 @@ document.querySelectorAll('[data-section]').forEach(el=>{
 function renderPlayers(filter){
   const f=filter==='all'?players:players.filter(p=>p.tag===filter);
   document.getElementById('playersGrid').innerHTML=f.map(p=>
-    '<div class="player-card"><div class="player-avatar" style="background:'+p.bg+'">'+p.emoji+'</div><div class="player-info"><div class="player-name">'+p.name+'</div><div class="player-en-name">'+p.en+'</div><div class="player-detail"><span>'+p.num+'号 · '+p.pos+'</span></div></div></div>'
+    '<div class="player-card" onclick="openPlayer(this.dataset.name)" data-name="'+p.name+'" style="cursor:pointer"><div class="player-avatar" style="background:'+p.bg+';overflow:hidden">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:contain;padding:8px">':p.emoji)+'</div><div class="player-info"><div class="player-name">'+p.name+'</div><div class="player-en-name">'+p.en+'</div><div class="player-detail"><span>'+p.num+'号 · '+p.pos+'</span></div></div></div>'
   ).join('');
 }
 
@@ -524,6 +574,52 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
   });
 });
 renderPlayers('all');
+
+// 球员荣誉与高光数据
+const playerDetails = {
+  '赵继伟': {honors:['2018年 CBA总冠军','2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','2021年 全运会冠军','2022年 CBA总决赛MVP','4届 CBA全明星','2届 最佳组织后卫'],highlights:[{game:'2022总决赛 G4 vs 广厦',score:'20分 8助攻',note:'FMVP之战'},{game:'2023总决赛 G3 vs 浙江',score:'17分 11助攻',note:'三连冠关键战'},{game:'2018总决赛 G2 vs 广厦',score:'19分 10助攻',note:'队史首冠征程'}]},
+  '王岚钦': {honors:['2024年 CBA全明星新锐赛','2024年 CBA常规赛最佳新秀候选'],highlights:[{game:'2024常规赛 vs 山东',score:'22分 5助攻',note:'生涯新高'},{game:'2024常规赛 vs 吉林',score:'18分 7助攻',note:'组织串联'},{game:'2024常规赛 vs 天津',score:'16分 6助攻',note:'攻防兼备'}]},
+  '郭士强': {honors:['2018年 CBA总冠军（主教练）','2018年 CBA最佳教练','2017年 全运会男篮金牌（主教练）','2000年 悉尼奥运会中国男篮成员','CBA全明星（球员）','辽宁男篮传奇后卫'],highlights:[{game:'2018总决赛 G4 vs 广厦（执教）',score:'辽宁4-0广厦',note:'队史首冠，终结22年等待'},{game:'2017全运会决赛 vs 新疆（执教）',score:'辽宁78-61新疆',note:'首次全运会夺金'},{game:'2000年悉尼奥运会（球员）',score:'代表中国男篮出战',note:'国家队高光时刻'}]},
+  '贺天举': {honors:['2018年 CBA总冠军','2016年 CBA全明星','2017年 CBA全明星','2015年 NBA夏季联赛（新奥尔良鹈鹕）','辽宁男篮三分神射手'],highlights:[{game:'2015 NBA夏季联赛首秀（鹈鹕）',score:'10分 6篮板',note:'中国球员夏联高光'},{game:'2018总决赛 G2 vs 广厦',score:'12分 4篮板',note:'队史首冠贡献'},{game:'2016 CBA全明星',score:'入选北区全明星',note:'巅峰赛季'}]},
+  '刘志轩': {honors:['2018年 CBA总冠军','2022年 CBA总冠军','2019年 男篮世界杯中国12人名单','辽宁男篮外线防守核心','CBA三分神射'],highlights:[{game:'2018总决赛 G4 vs 广厦',score:'9分 4助攻',note:'首冠收官战'},{game:'2019男篮世界杯 vs 科特迪瓦',score:'6分 4篮板',note:'国家队首秀'},{game:'2022季后赛 vs 广东',score:'12分 5助攻',note:'辽粤大战防守尖兵'}]},
+  '郭艾伦': {honors:['2018年 CBA总冠军','2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','2021年 全运会冠军','5届 CBA全明星','3届 常规赛MVP提名','CBA历史助攻榜前列'],highlights:[{game:'2021常规赛 vs 广东',score:'36分 9篮板',note:'辽粤大战'},{game:'2018总决赛 G3 vs 广厦',score:'26分 7助攻',note:'首冠冲刺'},{game:'2023季后赛 vs 北京',score:'32分 8助攻',note:'逆转晋级'}]},
+  '韩德君': {honors:['2018年 CBA总冠军','2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','2021年 全运会冠军','CBA历史篮板前列','辽宁队史功勋队长'],highlights:[{game:'2022总决赛 G1 vs 广厦',score:'18分 12篮板',note:'禁区统治'},{game:'2018总决赛 G4 vs 广厦',score:'16分 15篮板',note:'捧起首冠'},{game:'2021常规赛 vs 新疆',score:'24分 18篮板',note:'内线对决'}]},
+  '张镇麟': {honors:['2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','2021年 全运会冠军','2022年 最佳新秀','3届 CBA全明星'],highlights:[{game:'2023总决赛 G1 vs 浙江',score:'19分 8篮板',note:'关键先生'},{game:'2022半决赛 G3 vs 广东',score:'33分 7篮板',note:'辽粤大战'},{game:'2021常规赛 vs 广东',score:'24分 6篮板',note:'生涯新高战'}]},
+  '付豪': {honors:['2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','2021年 全运会冠军','CBA全明星'],highlights:[{game:'2023总决赛 G2 vs 浙江',score:'21分 6篮板',note:'内线爆发'},{game:'2022总决赛 G2 vs 广厦',score:'19分 8篮板',note:'首冠贡献'},{game:'2024总决赛 G1 vs 新疆',score:'18分 9篮板',note:'三连冠之战'}]},
+  '李晓旭': {honors:['2018年 CBA总冠军','2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','2021年 全运会冠军','辽宁队史篮板王'],highlights:[{game:'2022总决赛 G4 vs 广厦',score:'14分 12篮板',note:'首冠收官'},{game:'2023半决赛 vs 广厦',score:'16分 11篮板',note:'关键抢板'},{game:'2018总决赛 G1 vs 广厦',score:'12分 13篮板',note:'首冠序幕'}]},
+  '杨鸣': {honors:['2018年 CBA总冠军（球员）','2022-2024年 CBA三连冠（主帅）','2021年 全运会冠军（主帅）','3届 CBA总冠军教练','辽宁队史旗帜人物'],highlights:[{game:'2018总决赛 G2 vs 广厦',score:'14分 6助攻',note:'老将风采'},{game:'2012全运会 vs 广东',score:'18分 5助攻',note:'经典之战'},{game:'2013常规赛 vs 新疆',score:'16分 8助攻',note:'生涯巅峰'}]},
+  '哈德森': {honors:['2018年 CBA总冠军','2018年 CBA总决赛MVP','3届 CBA全明星','辽宁队史第一冠功臣'],highlights:[{game:'2018总决赛 G2 vs 广厦',score:'45分 6篮板',note:'FMVP封神'},{game:'2018总决赛 G4 vs 广厦',score:'32分 10篮板',note:'捧起首冠'},{game:'2017半决赛 vs 新疆',score:'41分 9篮板',note:'史诗对决'}]},
+  '福格': {honors:['2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','2023年 CBA总决赛MVP','2届 CBA全明星'],highlights:[{game:'2023总决赛 G4 vs 浙江',score:'29分 6助攻',note:'FMVP之战'},{game:'2022总决赛 G2 vs 广厦',score:'25分 8篮板',note:'攻防一体'},{game:'2024总决赛 G3 vs 新疆',score:'28分 7助攻',note:'三连冠'}]},
+  '莫兰德': {honors:['2022年 CBA总冠军','2023年 CBA总冠军','2024年 CBA总冠军','CBA最佳防守球员提名'],highlights:[{game:'2023总决赛 G1 vs 浙江',score:'12分 15篮板',note:'篮板怪兽'},{game:'2022总决赛 G3 vs 广厦',score:'10分 14篮板 5盖帽',note:'禁区屏障'},{game:'2024总决赛 G2 vs 新疆',score:'14分 12篮板',note:'内线统治'}]}
+};
+
+function openPlayer(name){
+  var p = players.find(function(x){return x.name===name});
+  if(!p) return;
+  var d = playerDetails[name];
+  document.getElementById("pmAvatar").innerHTML = p.photo ? '<img src="'+p.photo+'">' : p.emoji;
+  document.getElementById("pmAvatar").style.background = p.bg;
+  document.getElementById("pmName").textContent = p.name;
+  document.getElementById("pmMeta").textContent = p.en+' · '+p.num+'号 · '+p.pos;
+  var tags = {current:"现役主力",former:"名宿",legend:"传奇",import:"外援"};
+  document.getElementById("pmTag").textContent = tags[p.tag]||p.tag;
+  var hEl = document.getElementById("pmHonors");
+  var gEl = document.getElementById("pmHighlights");
+  if(d){
+    hEl.innerHTML = d.honors.map(function(h){return '<div class="pm-honor">'+h+'</div>'}).join('');
+    gEl.innerHTML = d.highlights.map(function(g){return '<div class="pm-highlight"><span class="pm-game">'+g.game+'</span><span class="pm-score">'+g.score+'</span></div>'+(g.note?'<div style="font-size:0.78rem;color:#999;padding:0 12px 6px">'+g.note+'</div>':'')}).join('');
+  } else {
+    hEl.innerHTML = '<div class="pm-empty">暂无详细荣誉数据</div>';
+    gEl.innerHTML = '<div class="pm-empty">暂无高光比赛数据</div>';
+  }
+  document.getElementById("playerModal").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+function closePlayer(){
+  document.getElementById("playerModal").classList.remove("show");
+  document.body.style.overflow = "";
+}
+
 
 
 // 精彩集锦播放
@@ -570,19 +666,20 @@ loadPrices();
 // 购买功能
 var buyItem = null, buyQty = 1;
 function loadPayQRs(){
-  document.getElementById("bankAccountShow").textContent=localStorage.getItem("liaoning_bank_account")||"6222 0200 1234 5678";
+  document.getElementById("bankAccountShow").textContent = localStorage.getItem("liaoning_bank_account") || "6222 0200 1234 5678";
   ["wechat","alipay"].forEach(function(t){
-    var el=document.getElementById("qr"+t.charAt(0).toUpperCase()+t.slice(1)+"Show");
-    var v=localStorage.getItem("liaoning_qr_"+t);
-    if(v){
-      el.innerHTML="<img src='"+v+"' style='max-width:100%;max-height:100%'>";
+    var el = document.getElementById("qr"+t.charAt(0).toUpperCase()+t.slice(1)+"Show");
+    var saved = localStorage.getItem("liaoning_qr_"+t);
+    if(saved){
+      el.innerHTML = "<img src='"+saved+"' style='max-width:100%;max-height:100%'>";
     }else{
-      el.innerHTML="<span style='color:#ccc;font-size:0.78rem'>管理员暂未设置</span>";
+      var img = new Image();
+      img.onload = function(){ el.innerHTML = "<img src='qr_"+t+".png?"+Date.now()+"' style='max-width:100%;max-height:100%'>"; };
+      img.onerror = function(){ el.innerHTML = "<span style='color:#ccc;font-size:0.78rem'>管理员暂未设置</span>"; };
+      img.src = "qr_"+t+".png?"+Date.now();
     }
   });
 }
-function getPayMethod(){var r=document.querySelector("input[name=payMethod]:checked");return r?r.value:"wechat"}
-function showPayInfo(){["wechat","alipay","cod","bank"].forEach(function(m){document.getElementById("payInfo"+m.charAt(0).toUpperCase()+m.slice(1)).className="pay-info"+(getPayMethod()===m?" show":"")})}
 function openBuy(name,price){
   buyItem = name; buyQty = 1;
   document.getElementById("buyTitle").textContent = name;
@@ -603,6 +700,8 @@ function changeQty(d){
   buyQty = Math.max(1, buyQty + d);
   document.getElementById("buyQty").textContent = buyQty;
 }
+function getPayMethod(){var r=document.querySelector("input[name=payMethod]:checked");return r?r.value:"wechat"}
+function showPayInfo(){["wechat","alipay","cod","bank"].forEach(function(m){document.getElementById("payInfo"+m.charAt(0).toUpperCase()+m.slice(1)).className="pay-info"+(getPayMethod()===m?" show":"")})}
 function submitOrder(){
   var name = document.getElementById("buyName").value.trim();
   var phone = document.getElementById("buyPhone").value.trim();
