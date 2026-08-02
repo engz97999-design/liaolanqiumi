@@ -225,6 +225,15 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .cart-qty{display:flex;align-items:center;gap:6px}
 .cart-qty button{width:26px;height:26px;border-radius:50%;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:1rem;line-height:1}
 .cart-total{font-weight:800;color:var(--red);font-size:1.05rem;margin-top:12px;text-align:right}
+.cart-item{background:#fafbfd;border:1px solid #eef0f5;border-radius:8px;padding:10px;margin-top:10px;gap:12px}
+.cart-item:last-child{border-bottom:none}
+.cart-thumb{width:52px;height:52px;border-radius:8px;overflow:hidden;background:#fff;border:1px solid #eee;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cart-thumb img{width:100%;height:100%;object-fit:cover}
+.cart-line-total{font-weight:800;color:var(--red);font-size:0.95rem;white-space:nowrap}
+.cart-remove{background:none;border:none;color:#bbb;cursor:pointer;font-size:0.78rem;text-decoration:underline;margin-top:4px}
+.cart-remove:hover{color:var(--red)}
+.cart-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
+.cart-footer .cart-total{margin:0}
 
 /* 响应式 */
 @media(max-width:768px){
@@ -927,6 +936,7 @@ function addToCart(name,price){
   if(!found)c.push({name:name,price:price,qty:1});
   saveCart(c);
 }
+var CART_IMG={"辽宁飞豹主场球衣":"jersey-home.jpg","辽宁飞豹客场球衣":"jersey-away.jpg","辽宁飞豹棒球帽":"merch_hat.jpg","辽宁飞豹围巾":"merch_scarf.jpg","辽宁飞豹双肩包":"merch_backpack.jpg","辽宁飞豹签名篮球":"merch_ball.jpg","辽宁飞豹卫衣":"merch_hoodie.jpg","辽宁飞豹日历":"merch_calendar.jpg","辽宁飞豹旅行包":"merch_travel_bag.jpg","辽宁飞豹训练篮球":"merch_training_ball.jpg"};
 function renderCart(){
   var list=document.getElementById("cartList");
   if(!list)return;
@@ -937,7 +947,9 @@ function renderCart(){
     list.innerHTML='<div style="text-align:center;color:#999;padding:20px 0">购物车是空的</div>';
   }else{
     list.innerHTML=c.map(function(x,i){
-      return '<div class="cart-item"><div class="cart-info"><div class="msg-name">'+esc(x.name)+'</div><div style="color:#888;font-size:0.8rem">¥'+x.price+' × '+x.qty+'</div></div><div class="cart-qty"><button onclick="changeCartQty('+i+',-1)">−</button><span>'+x.qty+'</span><button onclick="changeCartQty('+i+',1)">+</button></div><button class="btn-buy" onclick="buyCartItem('+i+')">去购买</button><button class="btn-cart" onclick="removeCartItem('+i+')">移除</button></div>';
+      var img=CART_IMG[x.name]||"";
+      var thumb=img?'<div class="cart-thumb"><img src="'+img+'" onerror="this.style.display=\'none\'"></div>':'';
+      return '<div class="cart-item">'+thumb+'<div class="cart-info"><div class="msg-name">'+esc(x.name)+'</div><div style="color:#888;font-size:0.78rem">单价 ¥'+x.price+'</div><div class="cart-qty" style="margin-top:6px"><button onclick="changeCartQty('+i+',-1)">−</button><span>'+x.qty+'</span><button onclick="changeCartQty('+i+',1)">+</button></div></div><div style="text-align:right"><div class="cart-line-total">¥'+(x.price*x.qty)+'</div><button class="btn-buy" style="margin-top:6px" onclick="buyCartItem('+i+')">去购买</button><br><button class="cart-remove" onclick="removeCartItem('+i+')">移除</button></div></div>';
     }).join('');
   }
   var total=c.reduce(function(s,x){return s+x.price*x.qty},0);
@@ -1001,7 +1013,10 @@ renderCart();
     <button class="buy-modal-close" onclick="closeCart()">&#10005;</button>
     <h2>购物车</h2>
     <div id="cartList"></div>
-    <div class="cart-total" id="cartTotal">合计：¥0</div>
+    <div class="cart-footer">
+      <div class="cart-total" id="cartTotal">合计：¥0</div>
+      <button class="btn btn-primary" onclick="closeCart()">继续选购</button>
+    </div>
   </div>
 </div>
 </body>
