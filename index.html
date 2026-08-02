@@ -214,6 +214,17 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .footer-content{display:flex;flex-direction:column;gap:6px}
 .footer-brand{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;color:rgba(255,255,255,0.7)}
 .footer-text{font-size:0.82rem}
+.cart-fab{position:fixed;right:16px;bottom:16px;z-index:9995;width:56px;height:56px;border:none;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-size:1.4rem;cursor:pointer;box-shadow:0 6px 20px rgba(204,0,0,.4);display:flex;align-items:center;justify-content:center}
+.cart-fab:hover{transform:translateY(-2px)}
+.cart-count{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#ffd700;color:#7a5200;font-size:0.72rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.btn-cart{display:inline-block;padding:6px 14px;border-radius:50px;border:1.5px solid var(--red);background:#fff;color:var(--red);font-weight:600;font-size:0.78rem;cursor:pointer;transition:.3s;white-space:nowrap;line-height:1.4}
+.btn-cart:hover{background:var(--red);color:#fff}
+.cart-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:0.85rem}
+.cart-item:last-child{border-bottom:none}
+.cart-item .cart-info{flex:1;min-width:0}
+.cart-qty{display:flex;align-items:center;gap:6px}
+.cart-qty button{width:26px;height:26px;border-radius:50%;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:1rem;line-height:1}
+.cart-total{font-weight:800;color:var(--red);font-size:1.05rem;margin-top:12px;text-align:right}
 
 /* 响应式 */
 @media(max-width:768px){
@@ -908,6 +919,70 @@ async function loadMyOrders(){
     return '<div class="msg-item"><div class="msg-body"><div class="msg-head"><span class="msg-name">'+esc(o.item)+'</span><span class="msg-time">'+(o.time||"")+'</span></div><div class="msg-content">数量：'+o.qty+(o.size?' · 尺码：'+o.size:'')+(payMap[o.pay]?' · '+payMap[o.pay]:'')+(amount?' · ¥'+amount:'')+'<br>状态：'+status+exp+'</div></div></div>';
   }).join("");
 }
+function getCart(){try{return JSON.parse(localStorage.getItem("liaoning_cart"))||[]}catch(e){return[]}}
+function saveCart(c){localStorage.setItem("liaoning_cart",JSON.stringify(c));renderCart();}
+function addToCart(name,price){
+  var c=getCart(),found=false;
+  c.forEach(function(x){if(x.name===name){x.qty+=1;found=true;}});
+  if(!found)c.push({name:name,price:price,qty:1});
+  saveCart(c);
+}
+function renderCart(){
+  var list=document.getElementById("cartList");
+  if(!list)return;
+  var c=getCart();
+  var count=document.getElementById("cartCount");
+  if(count)count.textContent=c.reduce(function(s,x){return s+x.qty},0);
+  if(!c.length){
+    list.innerHTML='<div style="text-align:center;color:#999;padding:20px 0">购物车是空的</div>';
+  }else{
+    list.innerHTML=c.map(function(x,i){
+      return '<div class="cart-item"><div class="cart-info"><div class="msg-name">'+esc(x.name)+'</div><div style="color:#888;font-size:0.8rem">¥'+x.price+' × '+x.qty+'</div></div><div class="cart-qty"><button onclick="changeCartQty('+i+',-1)">−</button><span>'+x.qty+'</span><button onclick="changeCartQty('+i+',1)">+</button></div><button class="btn-buy" onclick="buyCartItem('+i+')">去购买</button><button class="btn-cart" onclick="removeCartItem('+i+')">移除</button></div>';
+    }).join('');
+  }
+  var total=c.reduce(function(s,x){return s+x.price*x.qty},0);
+  var t=document.getElementById("cartTotal");
+  if(t)t.textContent="合计：¥"+total;
+}
+function changeCartQty(i,d){
+  var c=getCart();
+  if(i<0||i>=c.length)return;
+  c[i].qty=Math.max(1,c[i].qty+d);
+  saveCart(c);
+}
+function removeCartItem(i){
+  var c=getCart();
+  if(i<0||i>=c.length)return;
+  c.splice(i,1);
+  saveCart(c);
+}
+function buyCartItem(i){
+  var c=getCart();
+  if(i<0||i>=c.length)return;
+  closeCart();
+  openBuy(c[i].name,c[i].price);
+}
+function openCart(){
+  renderCart();
+  document.getElementById("cartModal").classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeCart(){
+  document.getElementById("cartModal").classList.remove("show");
+  document.body.style.overflow="";
+}
+document.querySelectorAll(".merch-card").forEach(function(card){
+  var btn=card.querySelector(".btn-buy");
+  if(!btn)return;
+  var name=card.querySelector("h3").textContent.trim();
+  var price=parseInt((card.querySelector(".merch-price").textContent||"").replace("¥",""))||0;
+  var cartBtn=document.createElement("button");
+  cartBtn.className="btn-cart";
+  cartBtn.textContent="加入购物车";
+  cartBtn.onclick=function(){addToCart(name,price);};
+  btn.parentNode.insertBefore(cartBtn,btn);
+});
+renderCart();
 </script>
 <div class="buy-modal" id="myModal">
   <div class="buy-modal-bg" onclick="closeMyOrders()"></div>
@@ -917,6 +992,16 @@ async function loadMyOrders(){
     <input id="myPhone" placeholder="输入你的手机号" style="width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:8px;margin:14px 0;font-size:0.95rem">
     <button class="btn-submit-order" onclick="loadMyOrders()">查看我的订单</button>
     <div id="myOrdersList" style="margin-top:16px"></div>
+  </div>
+</div>
+<button class="cart-fab" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
+<div class="buy-modal" id="cartModal">
+  <div class="buy-modal-bg" onclick="closeCart()"></div>
+  <div class="buy-modal-content">
+    <button class="buy-modal-close" onclick="closeCart()">&#10005;</button>
+    <h2>购物车</h2>
+    <div id="cartList"></div>
+    <div class="cart-total" id="cartTotal">合计：¥0</div>
   </div>
 </div>
 </body>
