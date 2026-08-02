@@ -338,7 +338,7 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 <div class="merch-card"><div class="merch-img-ph" style="background:linear-gradient(135deg,#cc0000,#ffd700);overflow:hidden"><img src="merch_ball.jpg" alt="辽宁飞豹签名篮球" style="width:100%;height:100%;object-fit:cover"></div><div class="merch-info"><h3>辽宁飞豹签名篮球</h3><p class="merch-desc">全体队员签名篮球，收藏佳品</p><div class="merch-footer"><div class="left"><span class="merch-price">¥599</span><span class="merch-badge">珍藏</span></div><button class="btn-buy" onclick="openBuy('辽宁飞豹签名篮球',599)">购买</button></div></div></div>
 <div class="merch-card"><div class="merch-img-ph" style="background:linear-gradient(135deg,#b8860b,#8b6914);overflow:hidden"><img src="cap_bing.jpg" alt="辽宁飞豹鸭舌帽" style="width:100%;height:100%;object-fit:cover"></div><div class="merch-info"><h3>辽宁飞豹鸭舌帽</h3><p class="merch-desc">球队logo刺绣鸭舌帽，日常百搭</p><div class="merch-footer"><div class="left"><span class="merch-price">¥89</span><span class="merch-badge">新上架</span></div><button class="btn-buy" onclick="openBuy('辽宁飞豹鸭舌帽',89)">购买</button></div></div></div>
 <div class="merch-card"><div class="merch-img-ph" style="background:linear-gradient(135deg,#2d5a6a,#1a3a4a);overflow:hidden"><img src="jd_hat.jpg" alt="辽宁飞豹针织帽" style="width:100%;height:100%;object-fit:cover"></div><div class="merch-info"><h3>辽宁飞豹针织帽</h3><p class="merch-desc">秋冬保暖针织帽，看球必备</p><div class="merch-footer"><div class="left"><span class="merch-price">¥69</span></div><button class="btn-buy" onclick="openBuy('辽宁飞豹针织帽',69)">购买</button></div></div></div>
-<div class="merch-card"><div class="merch-img-ph" style="background:linear-gradient(135deg,#8b0000,#cc0000);overflow:hidden"><img src="scarf_bing.jpg" alt="辽宁飞豹加厚围巾" style="width:100%;height:100%;object-fit:cover"></div><div class="merch-info"><h3>辽宁飞豹加厚围巾</h3><p class="merch-desc">加厚保暖款，经典配色</p><div class="merch-footer"><div class="left"><span class="merch-price">¥129</span><span class="merch-badge">畅销</span></div><button class="btn-buy" onclick="openBuy('辽宁飞豹加厚围巾',129)">购买</button></div></div></div>
+<div class="merch-card"><div class="merch-img-ph" style="background:linear-gradient(135deg,#2d2d2d,#555);overflow:hidden"><img src="backpack_bing.jpg" alt="辽宁飞豹旅行包" style="width:100%;height:100%;object-fit:cover"></div><div class="merch-info"><h3>辽宁飞豹旅行包</h3><p class="merch-desc">大容量旅行背包，出差旅行都合适</p><div class="merch-footer"><div class="left"><span class="merch-price">¥259</span><span class="merch-badge">新上架</span></div><button class="btn-buy" onclick="openBuy('辽宁飞豹旅行包',259)">购买</button></div></div></div>
 <div class="merch-card"><div class="merch-img-ph" style="background:linear-gradient(135deg,#cc6600,#ff8c00);overflow:hidden"><img src="ball_bing.jpg" alt="辽宁飞豹训练篮球" style="width:100%;height:100%;object-fit:cover"></div><div class="merch-info"><h3>辽宁飞豹训练篮球</h3><p class="merch-desc">日常训练用球，手感出色</p><div class="merch-footer"><div class="left"><span class="merch-price">¥399</span></div><button class="btn-buy" onclick="openBuy('辽宁飞豹训练篮球',399)">购买</button></div></div></div>
 </div>
 </div>
@@ -660,8 +660,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo()
 
 
 // 价格保存在浏览器本地，不需要服务器
-var PRICE_DEFAULTS={"辽宁飞豹主场球衣":299,"辽宁飞豹客场球衣":299,"辽宁飞豹棒球帽":129,"辽宁飞豹围巾":99,"辽宁飞豹双肩包":199,"辽宁飞豹签名篮球":599,"辽宁飞豹鸭舌帽":89,"辽宁飞豹针织帽":69,"辽宁飞豹加厚围巾":129,"辽宁飞豹训练篮球":399};
-var STOCK_DEFAULTS={"辽宁飞豹主场球衣":30,"辽宁飞豹客场球衣":30,"辽宁飞豹棒球帽":50,"辽宁飞豹围巾":50,"辽宁飞豹双肩包":30,"辽宁飞豹签名篮球":20,"辽宁飞豹鸭舌帽":50,"辽宁飞豹针织帽":50,"辽宁飞豹加厚围巾":40,"辽宁飞豹训练篮球":30};
+var PRICE_DEFAULTS={"辽宁飞豹主场球衣":299,"辽宁飞豹客场球衣":299,"辽宁飞豹棒球帽":129,"辽宁飞豹围巾":99,"辽宁飞豹双肩包":199,"辽宁飞豹签名篮球":599,"辽宁飞豹鸭舌帽":89,"辽宁飞豹针织帽":69,"辽宁飞豹旅行包":259,"辽宁飞豹训练篮球":399};
+var STOCK_DEFAULTS={"辽宁飞豹主场球衣":30,"辽宁飞豹客场球衣":30,"辽宁飞豹棒球帽":50,"辽宁飞豹围巾":50,"辽宁飞豹双肩包":30,"辽宁飞豹签名篮球":20,"辽宁飞豹鸭舌帽":50,"辽宁飞豹针织帽":50,"辽宁飞豹旅行包":25,"辽宁飞豹训练篮球":30};
 function getStockData(){
   var d={};
   try{d=JSON.parse(localStorage.getItem("liaoning_stock"))||{}}catch(e){d={}}
