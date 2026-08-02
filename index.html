@@ -214,6 +214,8 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .footer-content{display:flex;flex-direction:column;gap:6px}
 .footer-brand{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;color:rgba(255,255,255,0.7)}
 .footer-text{font-size:0.82rem}
+.my-btn{position:fixed;right:16px;bottom:16px;z-index:9990;padding:10px 18px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(204,0,0,.35);font-size:0.9rem}
+.my-btn:hover{transform:translateY(-1px)}
 
 /* 响应式 */
 @media(max-width:768px){
@@ -880,6 +882,43 @@ msgContent.addEventListener('input',()=>{
 
 renderMsgs();
 refreshMsgs();
+function openMyOrders(){
+  var p=document.getElementById("myPhone");
+  if(p&&localStorage.getItem("liaoning_my_phone"))p.value=localStorage.getItem("liaoning_my_phone");
+  document.getElementById("myModal").classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeMyOrders(){
+  document.getElementById("myModal").classList.remove("show");
+  document.body.style.overflow="";
+}
+async function loadMyOrders(){
+  var phone=document.getElementById("myPhone").value.trim();
+  if(!phone){alert("请输入手机号");return}
+  localStorage.setItem("liaoning_my_phone",phone);
+  var list=document.getElementById("myOrdersList");
+  list.innerHTML='<div style="text-align:center;color:#999;padding:20px 0">查询中...</div>';
+  var rows=await dbGet("orders","item,qty,size,price,pay,name,phone,addr,note,time,status,paid");
+  var mine=rows.filter(function(o){return String(o.phone)===String(phone);}).slice(0,50);
+  if(!mine.length){list.innerHTML='<div style="text-align:center;color:#999;padding:20px 0">没有查到订单</div>';return}
+  var payMap={wechat:"微信",alipay:"支付宝",cod:"货到付款",bank:"银行转账"};
+  list.innerHTML=mine.map(function(o){
+    var status=o.paid?"已付款":(o.status||"待处理");
+    var amount=(o.price||0)*o.qty;
+    return '<div class="msg-item"><div class="msg-body"><div class="msg-head"><span class="msg-name">'+esc(o.item)+'</span><span class="msg-time">'+(o.time||"")+'</span></div><div class="msg-content">数量：'+o.qty+(o.size?' · 尺码：'+o.size:'')+(payMap[o.pay]?' · '+payMap[o.pay]:'')+(amount?' · ¥'+amount:'')+'<br>状态：'+status+'</div></div></div>';
+  }).join("");
+}
 </script>
+<button class="my-btn" onclick="openMyOrders()">👤 我的订单</button>
+<div class="buy-modal" id="myModal">
+  <div class="buy-modal-bg" onclick="closeMyOrders()"></div>
+  <div class="buy-modal-content">
+    <button class="buy-modal-close" onclick="closeMyOrders()">&#10005;</button>
+    <h2>我的订单</h2>
+    <input id="myPhone" placeholder="输入你的手机号" style="width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:8px;margin:14px 0;font-size:0.95rem">
+    <button class="btn-submit-order" onclick="loadMyOrders()">查看我的订单</button>
+    <div id="myOrdersList" style="margin-top:16px"></div>
+  </div>
+</div>
 </body>
 </html>
