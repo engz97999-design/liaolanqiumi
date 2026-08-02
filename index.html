@@ -507,7 +507,7 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
       <div class="pay-info" id="payInfoCod"><p class="pay-tip" style="margin-top:8px">收到商品后再付款，安心放心</p></div>
       <div class="pay-info" id="payInfoBank"><div class="pay-account" id="bankAccountShow">加载中...</div><p class="pay-tip">开户行：中国银行 · 户名：辽宁飞豹</p><p class="pay-tip" style="margin-top:4px">转账后请备注订单号并联系管理员确认</p></div>
       <div id="payConfirmRow" style="display:none;margin-bottom:16px">
-        <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#555;cursor:pointer"><input type="checkbox" id="payConfirmed" style="width:16px;height:16px;accent-color:var(--red)"> 我已扫码并完成付款</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#555;cursor:pointer"><input type="checkbox" id="payConfirmed" onchange="document.getElementById('payError').style.display='none'" style="width:16px;height:16px;accent-color:var(--red)"> 我已扫码并完成付款</label>
       </div>
       <div class="form-row">
         <div><label>姓名</label><input id="buyName" placeholder="收货人姓名"></div>
@@ -516,6 +516,7 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
       <label>收货地址</label>
       <textarea id="buyAddr" placeholder="省/市/区/详细地址" rows="2"></textarea>
       <div style="margin-top:12px"><label>备注</label><textarea id="buyNote" placeholder="选填" rows="2"></textarea></div>
+      <div id="payError" style="display:none;color:var(--red);font-size:0.85rem;text-align:center;margin-bottom:12px;font-weight:700">尚未付款，请立即扫码付款后再提交</div>
       <button class="btn-submit-order" onclick="submitOrder()">提交订单</button>
     </div>
     <div class="order-success" id="orderSuccess">
@@ -745,8 +746,10 @@ function showPayInfo(){
   ["wechat","alipay","cod","bank"].forEach(function(m){document.getElementById("payInfo"+m.charAt(0).toUpperCase()+m.slice(1)).className="pay-info"+(pay===m?" show":"")});
   var row=document.getElementById("payConfirmRow");
   var cb=document.getElementById("payConfirmed");
+  var pe=document.getElementById("payError");
   if(row)row.style.display=pay==="cod"?"none":"block";
   if(cb)cb.checked=false;
+  if(pe)pe.style.display="none";
 }
 function submitOrder(){
   var name = document.getElementById("buyName").value.trim();
@@ -754,7 +757,11 @@ function submitOrder(){
   var addr = document.getElementById("buyAddr").value.trim();
   if(!name || !phone || !addr){ alert("请填写完整的收货信息"); return; }
   var pay = getPayMethod();
-  if(pay!=="cod" && !document.getElementById("payConfirmed").checked){ alert("请先扫码付款，并勾选“我已扫码并完成付款”"); return; }
+  if(pay!=="cod" && !document.getElementById("payConfirmed").checked){
+    var pe=document.getElementById("payError");
+    if(pe)pe.style.display="block";
+    return;
+  }
   var now = new Date();
   var time = now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日 "+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
   var orders = JSON.parse(localStorage.getItem("liaoning_orders")||"[]");
