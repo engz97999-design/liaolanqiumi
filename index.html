@@ -897,14 +897,15 @@ async function loadMyOrders(){
   localStorage.setItem("liaoning_my_phone",phone);
   var list=document.getElementById("myOrdersList");
   list.innerHTML='<div style="text-align:center;color:#999;padding:20px 0">查询中...</div>';
-  var rows=await dbGet("orders","item,qty,size,price,pay,name,phone,addr,note,time,status,paid");
+  var rows=await dbGet("orders","item,qty,size,price,pay,name,phone,addr,note,time,status,paid,express_company,express_no,express_status");
   var mine=rows.filter(function(o){return String(o.phone)===String(phone);}).slice(0,50);
   if(!mine.length){list.innerHTML='<div style="text-align:center;color:#999;padding:20px 0">没有查到订单</div>';return}
   var payMap={wechat:"微信",alipay:"支付宝",cod:"货到付款",bank:"银行转账"};
   list.innerHTML=mine.map(function(o){
     var status=o.paid?"已付款":(o.status||"待处理");
     var amount=(o.price||0)*o.qty;
-    return '<div class="msg-item"><div class="msg-body"><div class="msg-head"><span class="msg-name">'+esc(o.item)+'</span><span class="msg-time">'+(o.time||"")+'</span></div><div class="msg-content">数量：'+o.qty+(o.size?' · 尺码：'+o.size:'')+(payMap[o.pay]?' · '+payMap[o.pay]:'')+(amount?' · ¥'+amount:'')+'<br>状态：'+status+'</div></div></div>';
+    var exp=(o.express_no?'<br>快递：'+(o.express_company||'')+' · '+o.express_no:'');
+    return '<div class="msg-item"><div class="msg-body"><div class="msg-head"><span class="msg-name">'+esc(o.item)+'</span><span class="msg-time">'+(o.time||"")+'</span></div><div class="msg-content">数量：'+o.qty+(o.size?' · 尺码：'+o.size:'')+(payMap[o.pay]?' · '+payMap[o.pay]:'')+(amount?' · ¥'+amount:'')+'<br>状态：'+status+exp+'</div></div></div>';
   }).join("");
 }
 </script>
