@@ -506,6 +506,9 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
       <div class="pay-info" id="payInfoAlipay"><div class="pay-qr" id="qrAlipayShow"><span style="color:#ccc;font-size:0.78rem">加载中...</span></div><p class="pay-tip">打开支付宝扫一扫付款</p></div>
       <div class="pay-info" id="payInfoCod"><p class="pay-tip" style="margin-top:8px">收到商品后再付款，安心放心</p></div>
       <div class="pay-info" id="payInfoBank"><div class="pay-account" id="bankAccountShow">加载中...</div><p class="pay-tip">开户行：中国银行 · 户名：辽宁飞豹</p><p class="pay-tip" style="margin-top:4px">转账后请备注订单号并联系管理员确认</p></div>
+      <div id="payConfirmRow" style="display:none;margin-bottom:16px">
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#555;cursor:pointer"><input type="checkbox" id="payConfirmed" style="width:16px;height:16px;accent-color:var(--red)"> 我已扫码并完成付款</label>
+      </div>
       <div class="form-row">
         <div><label>姓名</label><input id="buyName" placeholder="收货人姓名"></div>
         <div><label>电话</label><input id="buyPhone" placeholder="手机号码"></div>
@@ -737,17 +740,26 @@ function changeQty(d){
   document.getElementById("buyQty").textContent = buyQty;
 }
 function getPayMethod(){var r=document.querySelector("input[name=payMethod]:checked");return r?r.value:"wechat"}
-function showPayInfo(){["wechat","alipay","cod","bank"].forEach(function(m){document.getElementById("payInfo"+m.charAt(0).toUpperCase()+m.slice(1)).className="pay-info"+(getPayMethod()===m?" show":"")})}
+function showPayInfo(){
+  var pay=getPayMethod();
+  ["wechat","alipay","cod","bank"].forEach(function(m){document.getElementById("payInfo"+m.charAt(0).toUpperCase()+m.slice(1)).className="pay-info"+(pay===m?" show":"")});
+  var row=document.getElementById("payConfirmRow");
+  var cb=document.getElementById("payConfirmed");
+  if(row)row.style.display=pay==="cod"?"none":"block";
+  if(cb)cb.checked=false;
+}
 function submitOrder(){
   var name = document.getElementById("buyName").value.trim();
   var phone = document.getElementById("buyPhone").value.trim();
   var addr = document.getElementById("buyAddr").value.trim();
   if(!name || !phone || !addr){ alert("请填写完整的收货信息"); return; }
+  var pay = getPayMethod();
+  if(pay!=="cod" && !document.getElementById("payConfirmed").checked){ alert("请先扫码付款，并勾选“我已扫码并完成付款”"); return; }
   var now = new Date();
   var time = now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日 "+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
   var orders = JSON.parse(localStorage.getItem("liaoning_orders")||"[]");
   var size=SIZABLE_ITEMS.indexOf(buyItem)>-1?(document.getElementById("buySize").value||""):"";
-  orders.unshift({item:buyItem,qty:buyQty,size:size,price:buyPriceVal,pay:getPayMethod(),name:name,phone:phone,addr:addr,note:document.getElementById("buyNote").value.trim(),time:time});
+  orders.unshift({item:buyItem,qty:buyQty,size:size,price:buyPriceVal,pay:pay,name:name,phone:phone,addr:addr,note:document.getElementById("buyNote").value.trim(),time:time});
   localStorage.setItem("liaoning_orders",JSON.stringify(orders));
   document.querySelector(".buy-form").style.display = "none";
   document.getElementById("orderSuccess").style.display = "block";
