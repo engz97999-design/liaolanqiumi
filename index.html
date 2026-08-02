@@ -214,8 +214,6 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 .footer-content{display:flex;flex-direction:column;gap:6px}
 .footer-brand{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;color:rgba(255,255,255,0.7)}
 .footer-text{font-size:0.82rem}
-.my-btn{position:fixed;right:16px;bottom:16px;z-index:9990;padding:10px 18px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(204,0,0,.35);font-size:0.9rem}
-.my-btn:hover{transform:translateY(-1px)}
 
 /* 响应式 */
 @media(max-width:768px){
@@ -256,6 +254,7 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
 <a class="nav-link" data-section="merch">球迷周边</a>
 <a class="nav-link" href="history.html" style="color:rgba(255,255,255,0.7);padding:7px 16px;border-radius:8px;font-weight:500;font-size:0.9rem;transition:.3s;cursor:pointer;text-decoration:none;display:inline-block">球队历史</a><a class="nav-link" data-section="guestbook">留言区</a>
 <a class="nav-link" data-section="highlights">精彩集锦</a>
+<a style="color:rgba(255,255,255,0.7);padding:7px 16px;border-radius:8px;font-weight:500;font-size:0.9rem;transition:.3s;cursor:pointer;text-decoration:none;display:inline-block" onclick="openMyOrders()">我的</a>
 </nav>
 <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
 </div>
@@ -909,7 +908,6 @@ async function loadMyOrders(){
   }).join("");
 }
 </script>
-<button class="my-btn" onclick="openMyOrders()">👤 我的订单</button>
 <div class="buy-modal" id="myModal">
   <div class="buy-modal-bg" onclick="closeMyOrders()"></div>
   <div class="buy-modal-content">
