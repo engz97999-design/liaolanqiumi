@@ -492,6 +492,9 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
         <span class="qty-num" id="buyQty">1</span>
         <button onclick="changeQty(1)">+</button>
       </div>
+      <div class="form-row" id="sizeRow" style="display:none">
+        <div><label>尺码</label><select id="buySize" style="width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:8px;background:#f8f8fc;font-family:inherit;font-size:0.93rem"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option></select></div>
+      </div>
       <label style="font-size:0.85rem;font-weight:600;color:#555;margin-bottom:6px;display:block">付款方式</label>
       <div class="pay-methods">
         <label><input type="radio" name="payMethod" value="wechat" checked onchange="showPayInfo()"><span class="pay-icon">💚</span>微信支付</label>
@@ -684,6 +687,7 @@ loadPrices();
 
 // 购买功能
 var buyItem = null, buyQty = 1;
+var SIZABLE_ITEMS=["辽宁飞豹主场球衣","辽宁飞豹客场球衣","辽宁飞豹卫衣"];
 function loadPayQRs(){
   document.getElementById("bankAccountShow").textContent = localStorage.getItem("liaoning_bank_account") || "6222 0200 1234 5678";
   ["wechat","alipay"].forEach(function(t){
@@ -711,6 +715,8 @@ function openBuy(name,price){
     line.className="stock-line"+(num<=0?" zero":"");
   }
   document.getElementById("buyQty").textContent = "1";
+  var sizeRow=document.getElementById("sizeRow");
+  if(sizeRow){sizeRow.style.display=SIZABLE_ITEMS.indexOf(name)>-1?"block":"none";}
   ["buyName","buyPhone","buyAddr","buyNote"].forEach(function(id){ document.getElementById(id).value = ""; });
   document.getElementById("orderSuccess").style.display = "none";
   document.querySelector(".buy-form").style.display = "block";
@@ -736,7 +742,8 @@ function submitOrder(){
   var now = new Date();
   var time = now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日 "+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
   var orders = JSON.parse(localStorage.getItem("liaoning_orders")||"[]");
-  orders.unshift({item:buyItem,qty:buyQty,pay:getPayMethod(),name:name,phone:phone,addr:addr,note:document.getElementById("buyNote").value.trim(),time:time});
+  var size=SIZABLE_ITEMS.indexOf(buyItem)>-1?(document.getElementById("buySize").value||""):"";
+  orders.unshift({item:buyItem,qty:buyQty,size:size,pay:getPayMethod(),name:name,phone:phone,addr:addr,note:document.getElementById("buyNote").value.trim(),time:time});
   localStorage.setItem("liaoning_orders",JSON.stringify(orders));
   document.querySelector(".buy-form").style.display = "none";
   document.getElementById("orderSuccess").style.display = "block";
