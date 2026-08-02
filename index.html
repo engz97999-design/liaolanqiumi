@@ -519,6 +519,8 @@ body{font-family:system-ui,-apple-system,'Microsoft YaHei',sans-serif;color:var(
       <div class="check">&#10003;</div>
       <h3>下单成功！</h3>
       <p>我们会尽快与您联系确认订单</p>
+      <div id="payStatus" style="margin-top:12px;font-size:0.85rem;color:#555"></div>
+      <button id="markPaidBtn" onclick="markPaid()" style="display:none;margin-top:10px;padding:8px 18px;border:none;border-radius:6px;background:var(--red);color:#fff;cursor:pointer">我已扫码付款</button>
     </div>
   </div>
 </div>
@@ -687,6 +689,7 @@ loadPrices();
 
 // 购买功能
 var buyItem = null, buyQty = 1;
+var buyPriceVal = 0;
 var SIZABLE_ITEMS=["辽宁飞豹主场球衣","辽宁飞豹客场球衣","辽宁飞豹卫衣"];
 function loadPayQRs(){
   document.getElementById("bankAccountShow").textContent = localStorage.getItem("liaoning_bank_account") || "6222 0200 1234 5678";
@@ -705,6 +708,7 @@ function loadPayQRs(){
 }
 function openBuy(name,price){
   buyItem = name; buyQty = 1;
+  buyPriceVal = price;
   document.getElementById("buyTitle").textContent = name;
   document.getElementById("buyPrice").textContent = "¥" + price;
   var stock=getStockData();
@@ -743,11 +747,43 @@ function submitOrder(){
   var time = now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日 "+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
   var orders = JSON.parse(localStorage.getItem("liaoning_orders")||"[]");
   var size=SIZABLE_ITEMS.indexOf(buyItem)>-1?(document.getElementById("buySize").value||""):"";
-  orders.unshift({item:buyItem,qty:buyQty,size:size,pay:getPayMethod(),name:name,phone:phone,addr:addr,note:document.getElementById("buyNote").value.trim(),time:time});
+  orders.unshift({item:buyItem,qty:buyQty,size:size,price:buyPriceVal,pay:getPayMethod(),name:name,phone:phone,addr:addr,note:document.getElementById("buyNote").value.trim(),time:time});
   localStorage.setItem("liaoning_orders",JSON.stringify(orders));
   document.querySelector(".buy-form").style.display = "none";
   document.getElementById("orderSuccess").style.display = "block";
-  setTimeout(closeBuy,2000);
+  showPayStatus();
+  setTimeout(closeBuy,4000);
+}
+
+function showPayStatus(){
+  var st=document.getElementById("payStatus");
+  var btn=document.getElementById("markPaidBtn");
+  if(!st)return;
+  var pay=getPayMethod();
+  if(pay==="cod"){
+    st.textContent="货到付款，无需在线支付";
+    if(btn)btn.style.display="none";
+    return;
+  }
+  var orders=[];
+  try{orders=JSON.parse(localStorage.getItem("liaoning_orders"))||[]}catch(e){orders=[]}
+  if(orders[0]&&orders[0].paid){
+    st.textContent="已标记付款，等待管理员确认";
+    if(btn)btn.style.display="none";
+  }else{
+    st.textContent="请扫码付款，付款完成后点击下方按钮";
+    if(btn)btn.style.display="inline-block";
+  }
+}
+
+function markPaid(){
+  var orders=[];
+  try{orders=JSON.parse(localStorage.getItem("liaoning_orders"))||[]}catch(e){orders=[]}
+  if(!orders.length)return;
+  orders[0].paid=true;
+  orders[0].payTime=new Date().toLocaleString();
+  localStorage.setItem("liaoning_orders",JSON.stringify(orders));
+  showPayStatus();
 }
 
 // 留言板
